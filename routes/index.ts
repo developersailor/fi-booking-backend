@@ -4,7 +4,14 @@ import { getRoomsByHotel, createRoom } from '../controllers/roomController';
 import { checkAvailability, fetchRoomsForHotel } from '../controllers/checkAvailabilityController';
 import {  login, logout, register } from '../controllers/userController';
 import { getAllHotels, getHotelById, createHotel, updateHotel, deleteHotel } from '../controllers/hotelController';
+
 import  swaggerUi from 'swagger-ui-express';
+import { 
+    getReviewsByHotelId, 
+    addReview, 
+    updateReview, 
+    deleteReview
+ } from '../controllers/reviewsController';
 const swaggerDocument: JSON = require('./swagger.json');
 
 const router = Router();
@@ -31,7 +38,10 @@ router.get('/hotels/:id', getHotelById);
 
 router.get('/hotels/:id/rooms', getRoomsByHotel);
 router.post('/hotels/:id/rooms', createRoom);
-
+router.get('/hotel/:hotelId/reviews', getReviewsByHotelId);
+router.post('/hotel/:hotelId/reviews', addReview);
+router.put('/hotel/:hotelId/reviews/:reviewId', updateReview);
+router.delete('/hotel/:hotelId/reviews/:reviewId', deleteReview);
 router.get('/bookings', getBookings);
 
 

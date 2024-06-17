@@ -45,9 +45,29 @@ model Room {
 }
 
 model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  password     String?   @db.VarChar(255)
+  createdAt    DateTime  @db.Timestamptz(6)
+  updatedAt    DateTime  @db.Timestamptz(6)
+  userComments Comment[]
+}
+
+model Review {
   id        Int      @id @default(autoincrement())
-  username  String   @unique
-  password  String?  @db.VarChar(255)
+  hotelId   Int
+  content   String
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  body      String
+  reviewId  Int
+  userId    Int
   createdAt DateTime @db.Timestamptz(6)
   updatedAt DateTime @db.Timestamptz(6)
+  User      User     @relation(fields: [userId], references: [id])
 }
