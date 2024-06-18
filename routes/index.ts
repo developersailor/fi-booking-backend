@@ -32,16 +32,19 @@ router.put('/bookings/:id', updateBooking);
 
 router.delete('/bookings/:id', deleteBooking);
 
-router.get('/hotels', getAllHotels);
+router.get('/hotel', getAllHotels);
 
-router.get('/hotels/:id', getHotelById);
+router.get('/hotel/:id', getHotelById);
 
 router.get('/hotels/:id/rooms', getRoomsByHotel);
 router.post('/hotels/:id/rooms', createRoom);
-router.get('/hotel/:hotelId/reviews', getReviewsByHotelId);
-router.post('/hotel/:hotelId/reviews', addReview);
-router.put('/hotel/:hotelId/reviews/:reviewId', updateReview);
-router.delete('/hotel/:hotelId/reviews/:reviewId', deleteReview);
+router.get('/hotel/:hotelId/review', getReviewsByHotelId);
+router.get('/reviews/:hotelId', getReviewsByHotelId);
+router.post('/hotel/:hotelId/review', addReview);
+router.put('/hotel/:hotelId/review/:reviewId', updateReview);
+router.delete('/hotel/:hotelId/review/:reviewId', deleteReview);
+
+
 router.get('/bookings', getBookings);
 
 
