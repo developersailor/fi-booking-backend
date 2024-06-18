@@ -56,8 +56,7 @@ export const checkAvailability = async (req: Request, res: Response) => {
     if (availableRooms.length === 0) {
       res.status(200).json({ available: false });
     }
-     
-
+    
   } catch (error) {
     console.error('Error checking availability:', error);
     res.status(500).json({ error: 'Failed to check availability. Please try again later.' });

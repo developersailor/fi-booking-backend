@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Prisma, PrismaClient } from '@prisma/client';
+import {  PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 export const getBookings = async (req: Request, res: Response) => {
   const { userId } = req.query;
@@ -21,8 +21,21 @@ export const getBookings = async (req: Request, res: Response) => {
   }
 };
 export const getAllHotels = async (req: Request, res: Response) => {
+  const { 
+    location,
+    pricePerNight,  
+  } = req.body;
   try{
-    const hotels = await prisma.hotel.findMany();
+    const hotels = await prisma.hotel.findMany({
+      where: {
+        location: {
+          contains: location
+        },
+        pricePerNight: {
+          lte: pricePerNight
+        },
+      }
+    });
     res.status(200).json(hotels);
   }
   catch(error){

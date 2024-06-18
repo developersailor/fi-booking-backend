@@ -3,8 +3,8 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Fetch reviews by hotelId
-export const getReviewsByHotelId = async (req: Request, res: Response) => {
+
+export const getReviewByHotelId = async (req: Request, res: Response) => {
   try {
     const { hotelId } = req.params;
     const reviews = await prisma.review.findMany({
@@ -16,8 +16,7 @@ export const getReviewsByHotelId = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
-
+}
 // Add a new review
 export const addReview = async (req: Request, res: Response) => {
   try {

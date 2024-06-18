@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import winston from 'winston'; 
-import path from 'path'; 
 
 import routes from './routes/index'; // Route'ları içe aktarın
 
