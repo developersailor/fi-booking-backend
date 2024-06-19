@@ -17,6 +17,9 @@ model Booking {
   checkOutDate DateTime? @db.Timestamptz(6)
   createdAt    DateTime  @db.Timestamptz(6)
   updatedAt    DateTime  @db.Timestamptz(6)
+  guestEmail   String?   @db.VarChar(255)
+  guestName    String?   @db.VarChar(255)
+  guestPhone   String?   @db.VarChar(255)
   Room         Room      @relation(fields: [roomId], references: [id])
 }
 
@@ -50,16 +53,17 @@ model User {
   password     String?   @db.VarChar(255)
   createdAt    DateTime  @db.Timestamptz(6)
   updatedAt    DateTime  @db.Timestamptz(6)
+  email        String?   @unique
   userComments Comment[]
 }
 
 model Review {
   id        Int      @id @default(autoincrement())
   hotelId   Int
-  content   String
-  rating    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  content   String
+  Rating    Rating[]
 }
 
 model Comment {
@@ -70,4 +74,16 @@ model Comment {
   createdAt DateTime @db.Timestamptz(6)
   updatedAt DateTime @db.Timestamptz(6)
   User      User     @relation(fields: [userId], references: [id])
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  ratingId  Int      @unique
+  hotelId   Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  reviewId  Int?
+  Review    Review?  @relation(fields: [reviewId], references: [id])
 }
